@@ -506,7 +506,7 @@ export function PediatricLiquidCalculator() {
           <div className="space-y-2">
             <Label htmlFor="stab" className="flex items-center gap-2">
               <ShieldAlert className="h-4 w-4 text-amber-600" />
-              {TH ? "อายุความคงตัวหลังเปิดขวด (วัน) — ไม่บังคับ" : "Stability after opening (days) — optional"}
+              {TH ? "อายุความคงตัวหลังผสม (วัน) — ไม่บังคับ" : "Stability after preparing (days) — optional"}
             </Label>
             <Input
               id="stab"
