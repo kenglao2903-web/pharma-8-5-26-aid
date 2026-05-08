@@ -73,31 +73,31 @@ const Index = () => {
           onValueChange={(v) => logActivity("open_tab", { tab: v })}
         >
           <TabsList className="h-auto grid w-full max-w-3xl grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 mb-6 no-print">
-            <TabsTrigger value="admixture" className="gap-2">
-              <Beaker className="h-4 w-4" /> {t("admixture")}
-            </TabsTrigger>
-            <TabsTrigger value="infusion" className="gap-2">
-              <Clock className="h-4 w-4" /> {t("infusionTime")}
-            </TabsTrigger>
-            <TabsTrigger value="fluid" className="gap-2">
-              <Droplet className="h-4 w-4" /> {t("fluidDuration")}
-            </TabsTrigger>
-            <TabsTrigger value="convert" className="gap-2">
-              <ArrowRightLeft className="h-4 w-4" /> {t("unitConvert")}
-            </TabsTrigger>
             <TabsTrigger value="pediatric" className="gap-2">
-              <Baby className="h-4 w-4" /> {t("pediatricLiquid")}
-            </TabsTrigger>
-            <TabsTrigger value="eyedrops" className="gap-2">
-              <Eye className="h-4 w-4" /> {t("eyeDrops")}
-            </TabsTrigger>
+  <Baby className="h-4 w-4" /> {t("pediatricLiquid")}
+</TabsTrigger>
+<TabsTrigger value="eyedrops" className="gap-2">
+  <Eye className="h-4 w-4" /> {t("eyeDrops")}
+</TabsTrigger>
+<TabsTrigger value="admixture" className="gap-2">
+  <Beaker className="h-4 w-4" /> {t("admixture")}
+</TabsTrigger>
+<TabsTrigger value="infusion" className="gap-2">
+  <Clock className="h-4 w-4" /> {t("infusionTime")}
+</TabsTrigger>
+<TabsTrigger value="fluid" className="gap-2">
+  <Droplet className="h-4 w-4" /> {t("fluidDuration")}
+</TabsTrigger>
+<TabsTrigger value="convert" className="gap-2">
+  <ArrowRightLeft className="h-4 w-4" /> {t("unitConvert")}
+</TabsTrigger>
           </TabsList>
-          <TabsContent value="admixture"><AdmixtureCalculator /></TabsContent>
-          <TabsContent value="infusion"><InfusionCalculator /></TabsContent>
-          <TabsContent value="fluid"><FluidDurationCalculator /></TabsContent>
-          <TabsContent value="convert"><UnitConverter /></TabsContent>
           <TabsContent value="pediatric"><PediatricLiquidCalculator /></TabsContent>
-          <TabsContent value="eyedrops"><EyeDropsCalculator /></TabsContent>
+<TabsContent value="eyedrops"><EyeDropsCalculator /></TabsContent>
+<TabsContent value="admixture"><AdmixtureCalculator /></TabsContent>
+<TabsContent value="infusion"><InfusionCalculator /></TabsContent>
+<TabsContent value="fluid"><FluidDurationCalculator /></TabsContent>
+<TabsContent value="convert"><UnitConverter /></TabsContent>
         </Tabs>
       </main>
     </div>
