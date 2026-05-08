@@ -44,7 +44,7 @@ const Index = () => {
                 PharmCalc <span className="text-brand">Pro</span>
               </h1>
               <p className="text-[11px] sm:text-xs font-medium" style={{ color: "#397D54" }}>
-                powered by BPH pharmacist department
+                powered by Chanunyu R. Pharmacist
               </p>
             </div>
           </div>
