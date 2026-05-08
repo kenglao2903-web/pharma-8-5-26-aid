@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 215 28% 17%;
+    --clinical-bg: 210 25% 97%;
+    /* Bangkok Hospital deep blue */
+    --primary-blue: 220 78% 28%;
+    --primary-blue-foreground: 0 0% 100%;
+    /* BPH Pharmacist Forest Green #397D54 */
+    --bph-green: 146 37% 36%;
+    --bph-green-foreground: 0 0% 100%;
+    --success: 158 64% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --danger: 0 84% 55%;
+    --danger-foreground: 0 0% 100%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 32% 8%;
+    --foreground: 210 30% 96%;
+    --clinical-bg: 222 30% 10%;
+    --primary-blue: 217 85% 62%;
+    --primary-blue-foreground: 222 47% 10%;
+    --bph-green: 146 45% 55%;
+    --bph-green-foreground: 222 47% 10%;
+    --success: 158 55% 50%;
+    --success-foreground: 222 47% 10%;
+    --warning: 38 92% 60%;
+    --warning-foreground: 222 47% 10%;
+    --danger: 0 75% 60%;
+    --danger-foreground: 0 0% 100%;
+
+    --card: 222 30% 12%;
+    --card-foreground: 210 30% 96%;
+
+    --popover: 222 30% 12%;
+    --popover-foreground: 210 30% 96%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    font-family: "Sarabun", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+}
+
+@layer utilities {
+  .clinical-card {
+    @apply bg-card text-card-foreground border border-border rounded-xl shadow-sm dark:shadow-none;
+  }
+  .label-clinical {
+    @apply text-xs font-semibold uppercase tracking-wider text-muted-foreground;
+  }
+  .text-bph-green {
+    color: hsl(var(--bph-green));
+  }
+  /* Shimmer border for action buttons */
+  .shimmer-border {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .shimmer-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(110deg, transparent 25%, hsl(var(--primary-blue) / 0.9) 45%, hsl(0 0% 100% / 0.95) 50%, hsl(var(--primary-blue) / 0.9) 55%, transparent 75%);
+    background-size: 220% 100%;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    animation: shimmer-slide 2.6s linear infinite;
+  }
+  @keyframes shimmer-slide {
+    0%   { background-position: 220% 0; }
+    100% { background-position: -120% 0; }
+  }
+}
+
+/* Print styles for thermal sticker printers — single page */
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 0mm 3mm;
+  }
+  html, body {
+    height: auto !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .print-area, .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #000 !important;
+    /* Use TH Sarabun PSK for official Thai documentation; fall back to open-source Sarabun */
+    font-family: "TH Sarabun PSK", "TH SarabunPSK", "Sarabun", "Noto Sans Thai", sans-serif;
+    font-size: 12pt;
+    line-height: 1.2;
+    font-weight: 500;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  .print-area * {
+    page-break-inside: avoid;
+  }
+  .print-area .print-logo-header {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 3px;
+    margin-bottom: 4px;
+  }
+  .print-area .print-logo-header img {
+    height: 28px;
+    width: auto;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-area .print-logo-header .hospital-name {
+    font-size: 11pt;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .print-area .print-logo-header .hospital-sub {
+    font-size: 8pt;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #333;
+  }
+  .print-area .print-title {
+    font-size: 14pt;
+    font-weight: 700;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 2px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .print-area .print-header {
+    background: #333 !important;
+    color: #fff !important;
+    font-size: 16pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 6px;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    border: 2px solid #333;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-area .print-header span {
+    color: #fff !important;
+  }
+  .print-area .print-section {
+    margin-top: 4px;
+    padding-top: 3px;
+    border-top: 1px dashed #000;
+  }
+  .print-area ol, .print-area ul {
+    padding-left: 14px;
+    margin: 2px 0;
+  }
+  .print-area li {
+    margin: 1px 0;
+  }
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}
