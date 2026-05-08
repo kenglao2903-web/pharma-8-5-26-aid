@@ -68,7 +68,7 @@ const Index = () => {
 
       <main className="container max-w-6xl py-6 sm:py-10">
         <Tabs
-          defaultValue="admixture"
+          defaultValue="pediatric"
           className="w-full"
           onValueChange={(v) => logActivity("open_tab", { tab: v })}
         >
