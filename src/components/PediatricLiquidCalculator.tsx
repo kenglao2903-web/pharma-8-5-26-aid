@@ -599,9 +599,18 @@ export function PediatricLiquidCalculator() {
           )}
 
           <div className="flex flex-wrap gap-2 pt-1">
-            <Button onClick={handleCalculate} disabled={errors.length > 0}>
-              {TH ? "คำนวณ" : "Calculate"}
-            </Button>
+            <Button
+  asChild
+  className="bg-red-500 hover:bg-red-600 text-white"
+>
+  <a
+    href="https://docs.google.com/spreadsheets/d/1xOXuaBvsJETkqVSEnPhKxG5UOFBOaz3U75cCcuaLzWI/edit?usp=sharing"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {TH ? "เช็ควันหมดอายุยา" : "Check Expiry"}
+  </a>
+</Button>
             <Button variant="outline" onClick={reset}>
               <RotateCcw className="h-4 w-4 mr-1" /> {TH ? "ล้างข้อมูล" : "Reset"}
             </Button>
