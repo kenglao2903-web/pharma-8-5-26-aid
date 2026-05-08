@@ -416,10 +416,27 @@ export function EyeDropsCalculator() {
           )}
 
           <div className="flex flex-wrap gap-2 pt-1">
-            <Button onClick={handleCalculate} disabled={errors.length > 0} className="shimmer-border">{TH ? "คำนวณ" : "Calculate"}</Button>
-            <Button variant="outline" onClick={reset} className="shimmer-border">
-              <RotateCcw className="h-4 w-4 mr-1" /> {TH ? "ล้างข้อมูล" : "Reset"}
-            </Button>
+            <Button
+  asChild
+  className="bg-red-500 hover:bg-red-600 text-white shimmer-border"
+>
+  <a
+    href="https://docs.google.com/spreadsheets/d/1xaeen9CSeCCH42LX4IexFNwX-6m_l8k8oeEs_htsX70/edit?usp=sharing"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {TH ? "ตรวจสอบวันหมดอายุ" : "Check Expiry"}
+  </a>
+</Button>
+
+<Button
+  variant="outline"
+  onClick={reset}
+  className="shimmer-border"
+>
+  <RotateCcw className="h-4 w-4 mr-1" />
+  {TH ? "ล้างข้อมูล" : "Reset"}
+</Button>
           </div>
         </CardContent>
       </Card>
