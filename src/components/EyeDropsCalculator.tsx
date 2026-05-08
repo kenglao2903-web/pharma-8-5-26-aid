@@ -401,10 +401,24 @@ export function EyeDropsCalculator() {
               {TH ? "วันที่เริ่มใช้ยา" : "Treatment start date"}
             </Label>
             <Input
-              id="treatmentStart" type="date"
-              value={treatmentStart} onChange={(e) => setTreatmentStart(e.target.value)}
-              className="h-10"
-            />
+  id="treatmentStart"
+  type="text"
+  placeholder="DD/MM/YYYY"
+  value={
+    treatmentStart
+      ? new Date(treatmentStart).toLocaleDateString("en-GB")
+      : ""
+  }
+  onChange={(e) => {
+    const value = e.target.value;
+    const [day, month, year] = value.split("/");
+
+    if (day && month && year) {
+      setTreatmentStart(`${year}-${month}-${day}`);
+    }
+  }}
+  className="h-10"
+/>
           </div>
 
           {errors.length > 0 && (dose || duration) && (
