@@ -506,7 +506,7 @@ export function PediatricLiquidCalculator() {
           <div className="space-y-2">
             <Label htmlFor="stab" className="flex items-center gap-2">
               <ShieldAlert className="h-4 w-4 text-amber-600" />
-              {TH ? "อายุความคงตัวหลังเปิดขวด (วัน) — ไม่บังคับ" : "Stability after opening (days) — optional"}
+              {TH ? "อายุความคงตัวหลังเตรียมยา (วัน) — ไม่บังคับ" : "Stability after preparation (days) — optional"}
             </Label>
             <Input
               id="stab"
@@ -693,7 +693,7 @@ export function PediatricLiquidCalculator() {
                 {expiration && (
                   <div className="rounded-md border bg-background p-3">
                     <div className="text-xs text-slate-500 mb-1">
-                      {TH ? "วันหมดอายุ (หลังเปิดขวด)" : "Expiration (after opening)"}
+                      {TH ? "วันหมดอายุหลังเตรียมยา" : "Expiration after preparation"}
                     </div>
                     <div className="text-sm">
                       <div>
@@ -711,7 +711,7 @@ export function PediatricLiquidCalculator() {
                 {bottlePrepDates.length > 1 && (
                   <div className="rounded-md border bg-background p-3">
                     <div className="text-xs text-slate-500 mb-2">
-                      {TH ? "ตารางเตรียมยาแต่ละขวด" : "Subsequent mixing schedule"}
+                      {TH ? "ตารางการเตรียมยาแต่ละขวด" : "Preparation schedule"}
                     </div>
                     <ul className="text-sm space-y-1">
                       {bottlePrepDates.map((d, i) => (
@@ -768,8 +768,8 @@ export function PediatricLiquidCalculator() {
             <AlertTitle>{TH ? "ข้อจำกัดด้านความคงตัว" : "Stability constraint applied"}</AlertTitle>
             <AlertDescription>
               {TH
-                ? `อายุความคงตัว ${numbers.stab} วัน < ระยะเวลารักษา ${numbers.dur} วัน — ต้องใช้ ${result!.bottles} ขวด เนื่องจากขวดที่เปิดแล้วจะหมดอายุก่อนใช้หมด`
-                : `Stability ${numbers.stab} d < treatment ${numbers.dur} d — ${result!.bottles} bottles are required because each opened bottle expires before being fully consumed.`}
+                ? `อายุความคงตัว ${numbers.stab} วัน < ระยะเวลารักษา ${numbers.dur} วัน — ต้องใช้ ${result!.bottles} ขวด เนื่องจากยาหลังเตรียมจะหมดอายุก่อนใช้หมด`
+                : `Stability ${numbers.stab} d < treatment ${numbers.dur} d — ${result!.bottles} the prepared medication expires before being fully consumed.`}
             </AlertDescription>
           </Alert>
         )}
@@ -958,7 +958,7 @@ export function PediatricLiquidCalculator() {
                 ⚠ Expiration Warning · คำเตือนวันหมดอายุ ⚠
               </div>
               <div style={{ fontSize: "15px", fontWeight: 700, color: "#7f1d1d", marginTop: "10px", textAlign: "center", lineHeight: 1.4 }}>
-                This prepared bottle expires on
+                This prepared medication expires on
               </div>
               <div style={{ fontSize: "28px", fontWeight: 900, color: "#b91c1c", margin: "6px 0", textAlign: "center", letterSpacing: "0.5px" }}>
                 {fmtDateTime(expiration.exp)}
@@ -967,7 +967,7 @@ export function PediatricLiquidCalculator() {
                 DO NOT consume after this time
               </div>
               <div style={{ fontSize: "13px", fontWeight: 700, color: "#7f1d1d", marginTop: "8px", textAlign: "center", lineHeight: 1.4 }}>
-                ขวดนี้หมดอายุวันที่ดังกล่าว · <span style={{ textDecoration: "underline" }}>ห้ามรับประทานหลังเวลานี้</span>
+                ยาที่เตรียมนี้จะหมดอายุวันที่ดังกล่าว · <span style={{ textDecoration: "underline" }}>ห้ามรับประทานหลังเวลานี้</span>
               </div>
             </div>
           )}
