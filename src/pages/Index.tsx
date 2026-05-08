@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Beaker, Clock, LogOut, ShieldCheck, Droplet, ArrowRightLeft, Baby, Eye } from "lucide-react";
+import { Beaker, Clock, LogOut, Droplet, ArrowRightLeft, Baby, Eye } from "lucide-react";
 import { AdmixtureCalculator } from "@/components/AdmixtureCalculator";
 import { InfusionCalculator } from "@/components/InfusionCalculator";
 import { FluidDurationCalculator } from "@/components/FluidDurationCalculator";
@@ -59,9 +59,6 @@ const Index = () => {
             <ThemeToggle />
             <LangSwitcher />
             <MessageInbox />
-            <Button variant="outline" size="sm" onClick={() => nav("/admin/login")} title={t("admin")}>
-              <ShieldCheck className="h-4 w-4" />
-            </Button>
             <Button variant="outline" size="sm" onClick={signOut}>
               <LogOut className="h-4 w-4 mr-1" /> {t("logout")}
             </Button>
