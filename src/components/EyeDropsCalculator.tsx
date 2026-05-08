@@ -358,7 +358,7 @@ export function EyeDropsCalculator() {
           <div className="space-y-2">
             <Label htmlFor="stab" className="flex items-center gap-2">
               <ShieldAlert className="h-4 w-4 text-amber-600" />
-              {TH ? "อายุความคงตัวหลังผสม (วัน)" : "Stability after preparing (days)"}
+              {TH ? "อายุความคงตัวหลังเปิดขวด (วัน)" : "Stability after opening (days)"}
             </Label>
             <Input
               id="stab" type="number" inputMode="decimal" min={0}
