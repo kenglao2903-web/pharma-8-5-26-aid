@@ -530,7 +530,6 @@ export function EyeDropsCalculator() {
                 ["Duration / ระยะเวลา", `${result.totalDays} days · วัน`],
                 ...(treatmentStartDate ? [["Treatment start / เริ่มใช้ยา", formatDate(treatmentStartDate)]] : []),
                 ...(treatmentEndDate ? [["Treatment end / สิ้นสุด", formatDate(treatmentEndDate)]] : []),
-                ...(Number.isFinite(result.dailyDrops) ? [["Drops per day / หยดต่อวัน", `${result.dailyDrops}`]] : []),
                 ...[["Bottles required / จำนวนขวด", `${result.bottlesNeeded}`]],
                 ...(Number.isFinite(numbers.stab) ? [["Stability / อายุความคงตัว", `${numbers.stab} days · วัน`]] : []),
                 ...(expiration ? [["Prepared / เตรียมเมื่อ", fmtDateTime(expiration.prep)]] : []),
@@ -682,6 +681,51 @@ export function EyeDropsCalculator() {
                   </div>
                 </div>
               )}
+              {treatmentEndDate && (
+  <div
+    style={{
+      border: "3px solid #059669",
+      background: "#ecfdf5",
+      borderRadius: "8px",
+      padding: "14px",
+      marginBottom: "12px",
+      textAlign: "center",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "12px",
+        fontWeight: 700,
+        color: "#059669",
+        letterSpacing: "1px",
+        textTransform: "uppercase",
+      }}
+    >
+      ⚠ Treatment End Date / วันสิ้นสุดการรักษา ⚠
+    </div>
+
+    <div
+      style={{
+        fontSize: "26px",
+        fontWeight: 800,
+        color: "#059669",
+        marginTop: "6px",
+      }}
+    >
+      {formatDate(treatmentEndDate)}
+    </div>
+
+    <div
+      style={{
+        fontSize: "11px",
+        color: "#065f46",
+        marginTop: "4px",
+      }}
+    >
+      Complete treatment until this date · ใช้ยาต่อเนื่องถึงวันที่นี้
+    </div>
+  </div>
+)}
               <div style={{ background: "#eff6ff", border: "1px solid #bfdbfe", borderRadius: "6px", padding: "10px", fontSize: "13px" }}>
                 <div style={{ fontWeight: 600, color: "#1e3a8a", fontSize: "11px", marginBottom: "4px" }}>{TH ? "วิธีใช้สำหรับผู้ป่วย" : "Patient instruction"}</div>
                 <div>EN: Instill {numbers.d} drop{numbers.d > 1 ? "s" : ""} {freqLabel}</div>
