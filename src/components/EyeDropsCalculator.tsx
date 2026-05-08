@@ -358,7 +358,7 @@ export function EyeDropsCalculator() {
           <div className="space-y-2">
             <Label htmlFor="stab" className="flex items-center gap-2">
               <ShieldAlert className="h-4 w-4 text-amber-600" />
-              {TH ? "อายุความคงตัวหลังเปิดขวด (วัน)" : "Stability after opening (days)"}
+              {TH ? "อายุความคงตัวหลังเตรียมยา (วัน)" : "Stability after preparation (days)"}
             </Label>
             <Input
               id="stab" type="number" inputMode="decimal" min={0}
@@ -370,7 +370,7 @@ export function EyeDropsCalculator() {
           <div className="space-y-2">
             <Label className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-brand" />
-              {TH ? "เวลาเตรียมยา / เปิดขวด" : "Preparation / opening time"}
+              {TH ? "เวลาเตรียมยา" : "Preparation time"}
             </Label>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-2.5 space-y-2">
               <div className="flex items-center justify-between gap-2">
@@ -472,7 +472,7 @@ export function EyeDropsCalculator() {
                   )}
                   {expiration && (
                     <div className="rounded-md border-2 border-rose-300 bg-rose-50 p-3">
-                      <div className="text-xs text-rose-700 font-semibold mb-1">{TH ? "วันหมดอายุ (หลังเปิดขวด)" : "Expiration (after opening)"}</div>
+                      <div className="text-xs text-rose-700 font-semibold mb-1">{TH ? "วันหมดอายุ (หลังเตรียมยา)" : "Expiration (after preparation)"}</div>
                       <div className="text-base font-bold text-rose-700 tabular-nums">{fmtDateTime(expiration.exp)}</div>
                     </div>
                   )}
@@ -556,7 +556,51 @@ export function EyeDropsCalculator() {
               </div>
             </div>
           )}
+{treatmentEndDate && (
+  <div
+    style={{
+      border: "3px solid #059669",
+      background: "#ecfdf5",
+      borderRadius: "8px",
+      padding: "14px",
+      marginBottom: "16px",
+      textAlign: "center",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "12px",
+        fontWeight: 700,
+        color: "#059669",
+        letterSpacing: "1px",
+        textTransform: "uppercase",
+      }}
+    >
+      ⚠ Treatment End Date / วันสิ้นสุดการรักษา ⚠
+    </div>
 
+    <div
+      style={{
+        fontSize: "26px",
+        fontWeight: 800,
+        color: "#059669",
+        marginTop: "6px",
+      }}
+    >
+      {formatDate(treatmentEndDate)}
+    </div>
+
+    <div
+      style={{
+        fontSize: "11px",
+        color: "#065f46",
+        marginTop: "4px",
+      }}
+    >
+      Complete treatment until this date · ใช้ยาต่อเนื่องถึงวันที่นี้
+    </div>
+  </div>
+)}
           <div style={{ background: "#eff6ff", border: "1px solid #bfdbfe", borderRadius: "6px", padding: "10px", marginBottom: "16px" }}>
             <div style={{ fontSize: "11px", color: "#1e3a8a", fontWeight: 600 }}>Patient Instruction · วิธีใช้สำหรับผู้ป่วย</div>
             <div style={{ fontSize: "13px", marginTop: "4px" }}>
@@ -570,16 +614,16 @@ export function EyeDropsCalculator() {
           {(expiration || bottleStartDates.length > 1) && (
             <div style={{ marginTop: "12px", padding: "10px 12px", border: "1px solid #cbd5e1", borderRadius: "6px", background: "#f8fafc" }}>
               <div style={{ fontSize: "11px", fontWeight: 700, color: "#1e3a8a", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" }}>
-                Bottle Schedule · ตารางการเปิดขวด
+                Preparation Schedule · ตารางการเตรียมยา
               </div>
               {expiration && (
                 <div style={{ fontSize: "12px", marginBottom: "4px" }}>
-                  <strong>Expiration of opened bottle / วันหมดอายุหลังเปิดขวด:</strong> {fmtDateTime(expiration.exp)}
+                  <strong>Expiration of Prepared / วันหมดอายุหลังเตรียมยา:</strong> {fmtDateTime(expiration.exp)}
                 </div>
               )}
               {bottleStartDates.length > 1 && bottleStartDates.slice(1).map((d, i) => (
                 <div key={i} style={{ fontSize: "12px" }}>
-                  Open bottle #{i + 2} on / เปิดขวดที่ {i + 2} วันที่: <strong>{formatDate(d)}</strong>
+                  Preparation bottle #{i + 2} on / เตรียมขวดที่ {i + 2} วันที่: <strong>{formatDate(d)}</strong>
                 </div>
               ))}
             </div>
@@ -648,12 +692,12 @@ export function EyeDropsCalculator() {
                   <div style={{ fontWeight: 700, color: "#1e3a8a", marginBottom: "4px" }}>{TH ? "ตารางการเปิดขวด" : "Bottle Schedule"}</div>
                   {expiration && (
                     <div style={{ marginBottom: "2px" }}>
-                      <strong>{TH ? "วันหมดอายุหลังเปิดขวด: " : "Expires (after opening): "}</strong>{fmtDateTime(expiration.exp)}
+                      <strong>{TH ? "วันหมดอายุหลังเตรียมยา: " : "Expires (after preparation): "}</strong>{fmtDateTime(expiration.exp)}
                     </div>
                   )}
                   {bottleStartDates.slice(1).map((d, i) => (
                     <div key={i}>
-                      {TH ? `เปิดขวดที่ ${i + 2} วันที่: ` : `Open bottle #${i + 2} on: `}<strong>{formatDate(d)}</strong>
+                      {TH ? `เตรียมยาขวดที่ ${i + 2} วันที่: ` : `Preparation bottle #${i + 2} on: `}<strong>{formatDate(d)}</strong>
                     </div>
                   ))}
                 </div>
