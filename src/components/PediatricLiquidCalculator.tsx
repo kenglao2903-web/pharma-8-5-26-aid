@@ -608,7 +608,7 @@ export function PediatricLiquidCalculator() {
     target="_blank"
     rel="noopener noreferrer"
   >
-    {TH ? "เช็ควันหมดอายุยา" : "Check Expiry"}
+    {TH ? "ตรวจสอบวันหมดอายุ" : "Check Expiry"}
   </a>
 </Button>
             <Button variant="outline" onClick={reset}>
