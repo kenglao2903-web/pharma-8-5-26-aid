@@ -747,7 +747,7 @@ export function EyeDropsCalculator() {
               </div>
               {(expiration || bottleStartDates.length > 1) && (
                 <div style={{ marginTop: "10px", padding: "10px 12px", border: "1px solid #cbd5e1", borderRadius: "6px", background: "#f8fafc", fontSize: "12px" }}>
-                  <div style={{ fontWeight: 700, color: "#1e3a8a", marginBottom: "4px" }}>{TH ? "ตารางการเปิดขวด" : "Bottle Schedule"}</div>
+                  <div style={{ fontWeight: 700, color: "#1e3a8a", marginBottom: "4px" }}>{TH ? "ตารางการเตรียมยา" : "Bottle Schedule"}</div>
                   {expiration && (
                     <div style={{ marginBottom: "2px" }}>
                       <strong>{TH ? "วันหมดอายุหลังเตรียมยา: " : "Expires (after preparation): "}</strong>{fmtDateTime(expiration.exp)}
