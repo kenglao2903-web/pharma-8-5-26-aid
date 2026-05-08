@@ -159,7 +159,7 @@ const Login = () => {
             className="mt-6 text-center text-xs font-medium"
             style={{ color: "#397D54" }}
           >
-            powered by BPH pharmacist department
+            powered by Chanunyu R. Pharmacist
           </p>
         </div>
       </section>
