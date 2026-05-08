@@ -580,21 +580,9 @@ export function PediatricLiquidCalculator() {
             </Label>
             <Input
   id="treatmentStart"
-  type="text"
-  placeholder="DD/MM/YYYY"
-  value={
-    treatmentStart
-      ? new Date(treatmentStart).toLocaleDateString("en-GB")
-      : ""
-  }
-  onChange={(e) => {
-    const value = e.target.value;
-    const [day, month, year] = value.split("/");
-
-    if (day && month && year) {
-      setTreatmentStart(`${year}-${month}-${day}`);
-    }
-  }}
+  type="date"
+  value={treatmentStart}
+  onChange={(e) => setTreatmentStart(e.target.value)}
   className="h-10"
 />
             <p className="text-[11px] text-slate-500">
