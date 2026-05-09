@@ -426,7 +426,7 @@ export function PediatricLiquidCalculator() {
               type="text"
               value={drugName}
               onChange={(e) => setDrugName(e.target.value)}
-              placeholder={TH ? "เช่น Amoxicillin syrup" : "e.g. Amoxicillin syrup"}
+              placeholder={TH ? "เช่น Metronidazole (20 mg/ml) 50mL" : "e.g. Metronidazole (20 mg/ml) 50mL"}
             />
             <p className="text-[11px] text-slate-500">
               {TH
