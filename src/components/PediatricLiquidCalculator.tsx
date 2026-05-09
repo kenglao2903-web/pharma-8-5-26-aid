@@ -386,7 +386,7 @@ export function PediatricLiquidCalculator() {
 </div>
 <div class="sticker">
   <div class="title">${TH ? "ตารางรับยา" : "Medication Refill"}</div>
-  <div class="sub">${drugName.trim() ? drugName.trim() + " · " : ""}${TH ? "ติดบนถุงยา" : "Attach to medication bag"}</div>
+  <div class="sub">${drugName.trim() ? drugName.trim() + " · " : ""}${TH ? "ยาเตรียมเฉพาะราย" : "Extemporaneous Preparation"}</div>
   <div class="bottles">${TH ? `ทั้งหมด ${total} ขวด` : `Total: ${total} bottles`}</div>
   <table>${rows}</table>
   <div class="footer">${TH ? "มารับยาขวดถัดไปก่อนยาขวดปัจจุบันหมด 1 วัน" : "Refill 1 day before current bottle expires"}</div>
