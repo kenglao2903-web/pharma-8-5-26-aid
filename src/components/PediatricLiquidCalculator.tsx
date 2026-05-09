@@ -292,7 +292,7 @@ const { member } = useAuth();
   refillMode === "early"
     ? Math.max(1, dpb - 1)
     : dpb; // proactive: 1-day overlap
-    const total = refillComparison?.bottlesProactive ?? result.bottles;
+    const total = refillMode === "early"? (refillComparison?.bottlesProactive ?? result.bottles): result.bottles;
     const out: { idx: number; date: Date }[] = [];
     for (let i = 0; i < total; i++) {
       const d = new Date(start);
