@@ -285,8 +285,7 @@ const { member } = useAuth();
   // starts on the day before previous expires (proactive refill timing).
   const stickerSchedule = useMemo(() => {
     if (!result) return [] as { idx: number; date: Date }[];
-    const startStr = treatmentStart || new Date().toISOString().slice(0, 10);
-    const start = new Date(startStr + "T00:00:00");
+    const start = prepTime? new Date(prepTime): new Date();
     const dpb = Math.max(1, result.daysPerBottle);
     const stride =
   refillMode === "early"
