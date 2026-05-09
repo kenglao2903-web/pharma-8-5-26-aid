@@ -66,7 +66,7 @@ export function PediatricLiquidCalculator() {
   const [expanded, setExpanded] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [refillMode, setRefillMode] = useState<"exact" | "early">("early");
-
+const { member } = useAuth();
   const numbers = useMemo(() => ({
     d: parseFloat(dose),
     f: parseFloat(freq),
