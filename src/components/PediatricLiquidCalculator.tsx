@@ -90,7 +90,7 @@ export function PediatricLiquidCalculator() {
     const { d, f, dur, b, stab } = numbers;
     const dailyMl = d * f;
     const totalCourseMl = dailyMl * dur;
-    const startDate = treatmentStart ? new Date(treatmentStart + "T00:00:00") : new Date();
+    const startDate = prepTime ? new Date(prepTime): new Date();
     startDate.setHours(0, 0, 0, 0);
 
     // Round DOWN: each bottle lasts a whole number of days.
@@ -136,7 +136,7 @@ export function PediatricLiquidCalculator() {
       idx++;
     }
     return items;
-  }, [numbers, errors.length, treatmentStart]);
+  }, [numbers, errors.length, prepTime]);
 
   const result = useMemo(() => {
     if (errors.length || schedule.length === 0) return null;
