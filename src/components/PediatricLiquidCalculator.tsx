@@ -1013,6 +1013,7 @@ const { member } = useAuth();
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px", marginBottom: "16px" }}>
             <tbody>
               {[
+                ["Treatment start date / วันที่เริ่มใช้ยา",treatmentStart? new Date(treatmentStart).toLocaleDateString(lang === "th" ? "th-TH" : "en-GB",{day: "2-digit",month: "short",year: "numeric",}): "—",],
                 ["Dose / ขนาดต่อครั้ง", `${numbers.d} ml`],
                 ["Frequency / ความถี่", `${numbers.f} ${"times/day · ครั้ง/วัน"}`],
                 ["Duration / ระยะเวลา", `${result.totalDays} days · วัน`],
@@ -1290,6 +1291,7 @@ const { member } = useAuth();
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px", marginBottom: "12px" }}>
                 <tbody>
                   {[
+                    [TH ? "วันที่เริ่มใช้ยา" : "Treatment start date",treatmentStart? new Date(treatmentStart).toLocaleDateString(TH ? "th-TH" : "en-GB",{day: "2-digit",month: "short",year: "numeric",}): "—",],
                     [TH ? "ขนาดต่อครั้ง" : "Dose", `${numbers.d} ml`],
                     [TH ? "ความถี่" : "Frequency", `${numbers.f} ${TH ? "ครั้ง/วัน" : "times/day"}`],
                     [TH ? "ระยะเวลา" : "Duration", `${result.totalDays} ${TH ? "วัน" : "days"}`],
