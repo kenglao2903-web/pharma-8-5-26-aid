@@ -30,7 +30,6 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { LangSwitcher } from "@/components/LangSwitcher";
-import { ADMIN_KEY } from "./AdminLogin";
 import { AdminMessages } from "@/components/AdminMessages";
 
 interface Member {
@@ -57,15 +56,21 @@ const Admin = () => {
   const [logs, setLogs] = useState<LogRow[]>([]);
   const [selectedLogs, setSelectedLogs] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    if (localStorage.getItem(ADMIN_KEY) !== "1") {
+ useEffect(() => {
+  const checkAuth = async () => {
+    const { data } = await supabase.auth.getSession();
+
+    if (!data.session) {
       nav("/admin/login");
       return;
     }
+
     setAuthorized(true);
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
+
+  checkAuth();
+}, []);
 
   const load = async () => {
     const [{ data: m }, { data: l }] = await Promise.all([
@@ -129,10 +134,10 @@ const Admin = () => {
     );
   };
 
-  const signOut = () => {
-    localStorage.removeItem(ADMIN_KEY);
-    nav("/admin/login");
-  };
+  const signOut = async () => {
+  await supabase.auth.signOut();
+  nav("/admin/login");
+};
 
   if (authorized === null) {
     return <div className="min-h-screen grid place-items-center text-slate-500">…</div>;
