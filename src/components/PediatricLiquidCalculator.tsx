@@ -996,30 +996,165 @@ export function PediatricLiquidCalculator() {
             </div>
           )}
 
-          <div style={{ background: "#ecfdf5", border: "2px solid #059669", borderRadius: "8px", padding: "12px", marginBottom: "14px", textAlign: "center" }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, color: "#065f46", textTransform: "uppercase", letterSpacing: "1px" }}>
-              Total Duration of Use · ระยะเวลาการรักษารวม
-            </div>
-            <div style={{ fontSize: "22px", fontWeight: 800, color: "#065f46", marginTop: "4px" }}>
-              {result.totalDays} days · {result.totalDays} วัน
-            </div>
-          </div>
+          {/* Top summary row */}
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "12px",
+    marginBottom: "14px",
+  }}
+>
+  {/* Duration */}
+  <div
+    style={{
+      background: "#ecfdf5",
+      border: "2px solid #059669",
+      borderRadius: "10px",
+      padding: "14px",
+      textAlign: "center",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "11px",
+        fontWeight: 700,
+        color: "#065f46",
+        textTransform: "uppercase",
+        letterSpacing: "1px",
+      }}
+    >
+      Total Duration · ระยะเวลาการรักษา
+    </div>
 
-          {refillDate && result.bottles > 1 && (
-            <div style={{ background: "#fffbeb", border: "2px solid #d97706", borderRadius: "8px", padding: "12px", marginBottom: "14px" }}>
-              <div style={{ fontSize: "12px", fontWeight: 800, color: "#92400e", textTransform: "uppercase", letterSpacing: "1px", textAlign: "center" }}>
-                ⏰ Return for Refill · นัดมารับยาขวดถัดไป
-              </div>
-              <div style={{ fontSize: "20px", fontWeight: 800, color: "#92400e", marginTop: "6px", textAlign: "center" }}>
-                {fmtDateTime(refillDate)}
-              </div>
-              <div style={{ fontSize: "11px", color: "#78350f", marginTop: "4px", textAlign: "center", lineHeight: 1.4 }}>
-                Please return 1 day before the current bottle expires to ensure continuous treatment.
-                <br />
-                กรุณามารับยาขวดใหม่ก่อนยาขวดปัจจุบันหมดอายุ 1 วัน เพื่อการรักษาต่อเนื่อง
-              </div>
-            </div>
-          )}
+    <div
+      style={{
+        fontSize: "24px",
+        fontWeight: 900,
+        color: "#065f46",
+        marginTop: "6px",
+      }}
+    >
+      {result.totalDays} {TH ? "วัน" : "days"}
+    </div>
+  </div>
+
+  {/* Next refill */}
+  {refillDate && result.bottles > 1 && (
+    <div
+      style={{
+        background: "#fffbeb",
+        border: "2px solid #d97706",
+        borderRadius: "10px",
+        padding: "14px",
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "11px",
+          fontWeight: 700,
+          color: "#92400e",
+          textTransform: "uppercase",
+          letterSpacing: "1px",
+        }}
+      >
+        Next Refill · นัดรับยาครั้งถัดไป
+      </div>
+
+      <div
+        style={{
+          fontSize: "18px",
+          fontWeight: 800,
+          color: "#92400e",
+          marginTop: "6px",
+          lineHeight: 1.3,
+        }}
+      >
+        {fmtDateTime(refillDate)}
+      </div>
+
+      <div
+        style={{
+          fontSize: "10px",
+          color: "#78350f",
+          marginTop: "6px",
+        }}
+      >
+        {TH
+          ? "รับยาก่อนหมด 1 วัน"
+          : "Refill 1 day before expiry"}
+      </div>
+    </div>
+  )}
+</div>
+
+{/* Compact refill schedule */}
+{stickerSchedule.length > 1 && (
+  <div
+    style={{
+      border: "1px solid #cbd5e1",
+      borderRadius: "10px",
+      padding: "12px",
+      marginBottom: "14px",
+      background: "#ffffff",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "11px",
+        fontWeight: 700,
+        color: "#334155",
+        marginBottom: "8px",
+        textTransform: "uppercase",
+        letterSpacing: "0.5px",
+      }}
+    >
+      Refill Schedule · ตารางรับยา
+    </div>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gap: "6px",
+      }}
+    >
+      {stickerSchedule.map((s) => (
+        <div
+          key={s.idx}
+          style={{
+            border: "1px solid #e2e8f0",
+            borderRadius: "8px",
+            padding: "6px 8px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            fontSize: "11px",
+          }}
+        >
+          <span
+            style={{
+              fontWeight: 700,
+              color: "#1e3a8a",
+            }}
+          >
+            {TH ? `ขวด ${s.idx}` : `#${s.idx}`}
+          </span>
+
+          <span
+            style={{
+              fontWeight: 600,
+              color: "#0f172a",
+            }}
+          >
+            {formatDate(s.date)}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
           <div style={{ background: "#eff6ff", border: "1px solid #bfdbfe", borderRadius: "6px", padding: "12px", marginBottom: "14px" }}>
             <div style={{ fontSize: "12px", color: "#1e3a8a", fontWeight: 700, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
@@ -1117,29 +1252,165 @@ export function PediatricLiquidCalculator() {
                   </div>
                 </div>
               )}
-              <div style={{ background: "#ecfdf5", border: "2px solid #059669", borderRadius: "8px", padding: "10px", marginBottom: "12px", textAlign: "center" }}>
-                <div style={{ fontSize: "11px", fontWeight: 700, color: "#065f46", textTransform: "uppercase", letterSpacing: "1px" }}>
-                  {TH ? "ระยะเวลาการรักษารวม" : "Total Duration of Use"}
-                </div>
-                <div style={{ fontSize: "20px", fontWeight: 800, color: "#065f46", marginTop: "4px" }}>
-                  {result.totalDays} {TH ? "วัน" : "days"}
-                </div>
-              </div>
-              {refillDate && result.bottles > 1 && (
-                <div style={{ background: "#fffbeb", border: "2px solid #d97706", borderRadius: "8px", padding: "10px", marginBottom: "12px" }}>
-                  <div style={{ fontSize: "11px", fontWeight: 800, color: "#92400e", textTransform: "uppercase", letterSpacing: "1px", textAlign: "center" }}>
-                    ⏰ {TH ? "นัดมารับยาขวดถัดไป" : "Return for Refill"}
-                  </div>
-                  <div style={{ fontSize: "18px", fontWeight: 800, color: "#92400e", marginTop: "4px", textAlign: "center" }}>
-                    {fmtDateTime(refillDate)}
-                  </div>
-                  <div style={{ fontSize: "10px", color: "#78350f", marginTop: "4px", textAlign: "center" }}>
-                    {TH
-                      ? "กรุณามารับยาขวดใหม่ก่อนยาขวดปัจจุบันหมดอายุ 1 วัน"
-                      : "Please return 1 day before the current bottle expires."}
-                  </div>
-                </div>
-              )}
+              {/* Top summary row */}
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "12px",
+    marginBottom: "14px",
+  }}
+>
+  {/* Duration */}
+  <div
+    style={{
+      background: "#ecfdf5",
+      border: "2px solid #059669",
+      borderRadius: "10px",
+      padding: "14px",
+      textAlign: "center",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "11px",
+        fontWeight: 700,
+        color: "#065f46",
+        textTransform: "uppercase",
+        letterSpacing: "1px",
+      }}
+    >
+      Total Duration · ระยะเวลาการรักษา
+    </div>
+
+    <div
+      style={{
+        fontSize: "24px",
+        fontWeight: 900,
+        color: "#065f46",
+        marginTop: "6px",
+      }}
+    >
+      {result.totalDays} {TH ? "วัน" : "days"}
+    </div>
+  </div>
+
+  {/* Next refill */}
+  {refillDate && result.bottles > 1 && (
+    <div
+      style={{
+        background: "#fffbeb",
+        border: "2px solid #d97706",
+        borderRadius: "10px",
+        padding: "14px",
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "11px",
+          fontWeight: 700,
+          color: "#92400e",
+          textTransform: "uppercase",
+          letterSpacing: "1px",
+        }}
+      >
+        Next Refill · นัดรับยาครั้งถัดไป
+      </div>
+
+      <div
+        style={{
+          fontSize: "18px",
+          fontWeight: 800,
+          color: "#92400e",
+          marginTop: "6px",
+          lineHeight: 1.3,
+        }}
+      >
+        {fmtDateTime(refillDate)}
+      </div>
+
+      <div
+        style={{
+          fontSize: "10px",
+          color: "#78350f",
+          marginTop: "6px",
+        }}
+      >
+        {TH
+          ? "รับยาก่อนหมด 1 วัน"
+          : "Refill 1 day before expiry"}
+      </div>
+    </div>
+  )}
+</div>
+
+{/* Compact refill schedule */}
+{stickerSchedule.length > 1 && (
+  <div
+    style={{
+      border: "1px solid #cbd5e1",
+      borderRadius: "10px",
+      padding: "12px",
+      marginBottom: "14px",
+      background: "#ffffff",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "11px",
+        fontWeight: 700,
+        color: "#334155",
+        marginBottom: "8px",
+        textTransform: "uppercase",
+        letterSpacing: "0.5px",
+      }}
+    >
+      Refill Schedule · ตารางรับยา
+    </div>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gap: "6px",
+      }}
+    >
+      {stickerSchedule.map((s) => (
+        <div
+          key={s.idx}
+          style={{
+            border: "1px solid #e2e8f0",
+            borderRadius: "8px",
+            padding: "6px 8px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            fontSize: "11px",
+          }}
+        >
+          <span
+            style={{
+              fontWeight: 700,
+              color: "#1e3a8a",
+            }}
+          >
+            {TH ? `ขวด ${s.idx}` : `#${s.idx}`}
+          </span>
+
+          <span
+            style={{
+              fontWeight: 600,
+              color: "#0f172a",
+            }}
+          >
+            {formatDate(s.date)}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
               <div style={{ background: "#eff6ff", border: "1px solid #bfdbfe", borderRadius: "6px", padding: "10px", marginBottom: "12px", fontSize: "13px" }}>
                 <div style={{ fontWeight: 700, color: "#1e3a8a", fontSize: "11px", marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                   {TH ? "วิธีใช้สำหรับผู้ป่วย" : "Patient instruction"}
