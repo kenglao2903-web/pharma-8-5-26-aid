@@ -65,6 +65,7 @@ export function PediatricLiquidCalculator() {
   const [showSchedule, setShowSchedule] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [refillMode, setRefillMode] = useState<"exact" | "early">("early");
 
   const numbers = useMemo(() => ({
     d: parseFloat(dose),
@@ -251,9 +252,18 @@ export function PediatricLiquidCalculator() {
 
   // Refill = 1 day before current bottle expires (continuity buffer)
   const refillDate = useMemo(() => {
-    if (!expiration) return null;
-    return new Date(expiration.exp.getTime() - 24 * 3600 * 1000);
-  }, [expiration]);
+  if (!expiration) return null;
+
+  // รับวันหมดพอดี
+  if (refillMode === "exact") {
+    return new Date(expiration.exp);
+  }
+
+  // รับก่อนหมด 1 วัน
+  return new Date(
+    expiration.exp.getTime() - 24 * 3600 * 1000
+  );
+}, [expiration, refillMode]);
 
   // Proactive refill comparison — does picking up the next bottle 1 day before
   // expiry change the total number of bottles needed for the full course?
@@ -279,7 +289,10 @@ export function PediatricLiquidCalculator() {
     const startStr = treatmentStart || new Date().toISOString().slice(0, 10);
     const start = new Date(startStr + "T00:00:00");
     const dpb = Math.max(1, result.daysPerBottle);
-    const stride = Math.max(1, dpb - 1); // proactive: 1-day overlap
+    const stride =
+  refillMode === "early"
+    ? Math.max(1, dpb - 1)
+    : dpb; // proactive: 1-day overlap
     const total = refillComparison?.bottlesProactive ?? result.bottles;
     const out: { idx: number; date: Date }[] = [];
     for (let i = 0; i < total; i++) {
@@ -288,7 +301,7 @@ export function PediatricLiquidCalculator() {
       out.push({ idx: i + 1, date: d });
     }
     return out;
-  }, [result, treatmentStart, refillComparison]);
+  }, [result, treatmentStart, refillComparison, refillMode]);
 
   const fmtDateTime = (d: Date) =>
     d.toLocaleString(TH ? "th-TH" : "en-GB", {
@@ -606,7 +619,52 @@ export function PediatricLiquidCalculator() {
                 : "Date the patient actually starts taking the medication (may differ from preparation date)."}
             </p>
           </div>
+<div className="space-y-2 pt-2">
+  <Label>
+    {TH ? "รูปแบบการนัดรับยา" : "Refill strategy"}
+  </Label>
 
+  <ToggleGroup
+    type="single"
+    value={refillMode}
+    onValueChange={(v) => {
+      if (v === "exact" || v === "early") {
+        setRefillMode(v);
+      }
+    }}
+    className="grid grid-cols-2 gap-2"
+  >
+    <ToggleGroupItem
+      value="exact"
+      className="flex flex-col items-start rounded-md border p-3 text-left data-[state=on]:bg-brand data-[state=on]:text-white"
+    >
+      <span className="font-semibold">
+        {TH ? "รับวันหมดพอดี" : "Exact refill"}
+      </span>
+
+      <span className="text-[10px] opacity-80">
+        {TH
+          ? "รับยาวันที่ยาหมดหรือหมดอายุ"
+          : "Pickup on depletion/expiry date"}
+      </span>
+    </ToggleGroupItem>
+
+    <ToggleGroupItem
+      value="early"
+      className="flex flex-col items-start rounded-md border p-3 text-left data-[state=on]:bg-brand data-[state=on]:text-white"
+    >
+      <span className="font-semibold">
+        {TH ? "รับล่วงหน้า 1 วัน" : "Early refill"}
+      </span>
+
+      <span className="text-[10px] opacity-80">
+        {TH
+          ? "รับก่อนหมด 1 วัน"
+          : "Pickup 1 day before depletion"}
+      </span>
+    </ToggleGroupItem>
+  </ToggleGroup>
+</div>
           {errors.length > 0 && (dose || duration) && (
             <ul className="text-xs text-destructive space-y-1">
               {errors.map((e) => <li key={e}>• {e}</li>)}
@@ -1059,7 +1117,9 @@ export function PediatricLiquidCalculator() {
           letterSpacing: "1px",
         }}
       >
-        Next Refill · นัดรับยาครั้งถัดไป
+        {refillMode === "early"
+  ? "Next Refill · นัดรับยาครั้งถัดไป"
+  : "Refill On Expiry · รับยาวันหมดพอดี"}
       </div>
 
       <div
@@ -1074,17 +1134,26 @@ export function PediatricLiquidCalculator() {
         {fmtDateTime(refillDate)}
       </div>
 
-      <div
-        style={{
-          fontSize: "10px",
-          color: "#78350f",
-          marginTop: "6px",
-        }}
-      >
-        {TH
-          ? "รับยาก่อนหมด 1 วัน"
-          : "Refill 1 day before expiry"}
-      </div>
+     <div
+  style={{
+    fontSize: "10px",
+    color: "#78350f",
+    marginTop: "6px",
+    lineHeight: 1.4,
+  }}
+>
+  {refillMode === "early"
+    ? (
+      TH
+        ? "รับยาก่อนหมด/หมดอายุ 1 วัน"
+        : "Refill 1 day before expiry"
+    )
+    : (
+      TH
+        ? "รับยาวันที่ยาหมดหรือหมดอายุพอดี"
+        : "Refill on expiry day"
+    )}
+</div>
     </div>
   )}
 </div>
@@ -1315,7 +1384,9 @@ export function PediatricLiquidCalculator() {
           letterSpacing: "1px",
         }}
       >
-        Next Refill · นัดรับยาครั้งถัดไป
+        {refillMode === "early"
+  ? "Next Refill · นัดรับยาครั้งถัดไป"
+  : "Refill On Expiry · รับยาวันหมดพอดี"}
       </div>
 
       <div
@@ -1331,16 +1402,26 @@ export function PediatricLiquidCalculator() {
       </div>
 
       <div
-        style={{
-          fontSize: "10px",
-          color: "#78350f",
-          marginTop: "6px",
-        }}
-      >
-        {TH
-          ? "รับยาก่อนหมด 1 วัน"
-          : "Refill 1 day before expiry"}
-      </div>
+  style={{
+    fontSize: "10px",
+    color: "#78350f",
+    marginTop: "4px",
+    textAlign: "center",
+    lineHeight: 1.4,
+  }}
+>
+  {refillMode === "early"
+    ? (
+      TH
+        ? "กรุณามารับยาขวดใหม่ก่อนยาขวดปัจจุบันหมดอายุ 1 วัน"
+        : "Please return 1 day before the current bottle expires."
+    )
+    : (
+      TH
+        ? "กรุณามารับยาวันที่ยาหมดหรือหมดอายุพอดี"
+        : "Please return on the day the current bottle is finished or expired."
+    )}
+</div>
     </div>
   )}
 </div>
