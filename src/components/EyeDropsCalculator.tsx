@@ -261,7 +261,7 @@ export function EyeDropsCalculator() {
               id="drugName"
               value={drugName}
               onChange={(e) => setDrugName(e.target.value)}
-              placeholder={TH ? "เช่น Tobramycin eye drops" : "e.g. Tobramycin eye drops"}
+              placeholder={TH ? "เช่น Cefazolin eye drop (50 mg/ml)" : "e.g. Cefazolin eye drop (50 mg/ml)"}
             />
           </div>
 
