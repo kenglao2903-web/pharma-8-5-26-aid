@@ -1033,8 +1033,21 @@ export function PediatricLiquidCalculator() {
             </div>
           </div>
 
-          <div style={{ marginTop: "20px", paddingTop: "10px", borderTop: "1px dashed #cbd5e1", fontSize: "10px", color: "#64748b", display: "flex", justifyContent: "space-between" }}>
-            <span>For pharmacist use · Verify before dispense / สำหรับเภสัชกร · ตรวจสอบก่อนจ่ายยา</span>
+          <div
+  style={{
+    marginTop: "20px",
+    paddingTop: "10px",
+    paddingBottom: "2px",
+    borderTop: "1px dashed #cbd5e1",
+    fontSize: "10px",
+    lineHeight: "16px",
+    color: "#64748b",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  }}
+>
+            <span>Instructions for Receiving Patient-Specific Extemporaneous Medication / คำแนะนำในการรับยาเตรียมเฉพาะราย</span>
             <span>Printed · พิมพ์เมื่อ: {new Date().toLocaleString(lang === "th" ? "th-TH" : "en-GB")}</span>
           </div>
         </div>
