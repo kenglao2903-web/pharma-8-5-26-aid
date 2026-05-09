@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SHA256 from "crypto-js/sha256";
 import { useNavigate, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,7 @@ import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
 import { LangSwitcher } from "@/components/LangSwitcher";
 
-const ACCESS_CODE = "25031998";
+const HASH ="03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
 export const ADMIN_KEY = "pharmcalc.admin";
 
 const AdminLogin = () => {
