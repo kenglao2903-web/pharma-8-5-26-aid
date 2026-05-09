@@ -1246,7 +1246,7 @@ const { member } = useAuth();
     fontSize: "10px",
     lineHeight: "18px",
     color: "#64748b",
-    
+    display: "flex", justifyContent: "space-between", alignItems: "center"
   }}
 >
             <span>Instructions for Receiving Patient-Specific Extemporaneous Medication / คำแนะนำในการรับยาเตรียมเฉพาะราย</span>
