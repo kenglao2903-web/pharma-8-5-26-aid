@@ -52,7 +52,7 @@ export function PediatricLiquidCalculator() {
   const [dose, setDose] = useState("");
   const [freq, setFreq] = useState<string>("3");
   const [duration, setDuration] = useState("");
-  const [bottle, setBottle] = useState<number>(60);
+  const [bottle, setBottle] = useState<number | "">("");
   const [stability, setStability] = useState("");
   const [prepTime, setPrepTime] = useState<string>(() => toLocalIso(new Date()));
   const [treatmentStart, setTreatmentStart] = useState<string>(() => {
@@ -486,13 +486,13 @@ export function PediatricLiquidCalculator() {
   <Label>{TH ? "ปริมาตรต่อขวด (มล.)" : "Bottle volume (ml)"}</Label>
 
   {/* Quick Select */}
-  <div className="flex gap-2 flex-wrap items-center">
+<div className="flex gap-2 flex-wrap items-center">
   {BOTTLE_OPTIONS.map((b) => (
     <Button
       key={b}
       type="button"
-      variant={bottle === b ? "default" : "outline"}
-      onClick={() => setBottle(b)}
+      variant={String(bottle) === b ? "default" : "outline"}
+      onClick={() => setBottle(Number(b))}
     >
       {b} ml
     </Button>
@@ -502,23 +502,14 @@ export function PediatricLiquidCalculator() {
     type="number"
     inputMode="decimal"
     min={1}
-    value={bottle}
-    onChange={(e) => setBottle(e.target.value)}
+    value={bottle || ""}
+    onChange={(e) =>
+      setBottle(e.target.value === "" ? "" : Number(e.target.value))
+    }
     placeholder={TH ? "กรอกปริมาตร" : "Enter volume"}
     className="h-10 w-32"
   />
 </div>
-
-  {/* Custom Input */}
-  <Input
-  type="number"
-  inputMode="decimal"
-  min={1}
-  value={bottle}
-  onChange={(e) => setBottle(e.target.value)}
-  placeholder={TH ? "กรอกปริมาตร" : "Enter volume"}
-  className="h-11 w-32"
- />
 
   <p className="text-[11px] text-slate-500">
     {TH
