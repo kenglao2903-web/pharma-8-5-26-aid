@@ -501,13 +501,14 @@ export function PediatricLiquidCalculator() {
 
   {/* Custom Input */}
   <Input
-    type="number"
-    inputMode="decimal"
-    min={1}
-    value={bottle}
-    onChange={(e) => setBottle(e.target.value)}
-    placeholder={TH ? "ระบุเอง เช่น 75" : "Custom volume e.g. 75"}
-  />
+  type="number"
+  inputMode="decimal"
+  min={1}
+  value={bottle}
+  onChange={(e) => setBottle(e.target.value)}
+  placeholder={TH ? "กรอกปริมาตร" : "Enter volume"}
+  className="h-11 w-32"
+ />
 
   <p className="text-[11px] text-slate-500">
     {TH
