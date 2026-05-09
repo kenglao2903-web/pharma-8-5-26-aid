@@ -52,7 +52,7 @@ export function PediatricLiquidCalculator() {
   const [dose, setDose] = useState("");
   const [freq, setFreq] = useState<string>("3");
   const [duration, setDuration] = useState("");
-  const [bottle, setBottle] = useState<string>("60");
+  const [bottle, setBottle] = useState<number>(60);
   const [stability, setStability] = useState("");
   const [prepTime, setPrepTime] = useState<string>(() => toLocalIso(new Date()));
   const [treatmentStart, setTreatmentStart] = useState<string>(() => {
@@ -483,25 +483,38 @@ export function PediatricLiquidCalculator() {
           </div>
 
           <div className="space-y-2">
-            <Label>{TH ? "ปริมาตรต่อขวด (มล.)" : "Bottle volume (ml)"}</Label>
-            <ToggleGroup
-              type="single"
-              value={bottle}
-              onValueChange={(v) => v && setBottle(v)}
-              className="grid grid-cols-4 gap-2"
-            >
-              {BOTTLE_OPTIONS.map((b) => (
-                <ToggleGroupItem
-                  key={b}
-                  value={b}
-                  className="h-11 rounded-md border bg-background data-[state=on]:bg-brand data-[state=on]:text-primary-foreground data-[state=on]:border-brand"
-                >
-                  <span className="font-semibold">{b}</span>
-                  <span className="ml-1 text-xs opacity-80">ml</span>
-                </ToggleGroupItem>
-              ))}
-            </ToggleGroup>
-          </div>
+  <Label>{TH ? "ปริมาตรต่อขวด (มล.)" : "Bottle volume (ml)"}</Label>
+
+  {/* Quick Select */}
+  <div className="flex gap-2 flex-wrap">
+    {BOTTLE_OPTIONS.map((b) => (
+      <Button
+        key={b}
+        type="button"
+        variant={bottle === b ? "default" : "outline"}
+        onClick={() => setBottle(b)}
+      >
+        {b} ml
+      </Button>
+    ))}
+  </div>
+
+  {/* Custom Input */}
+  <Input
+    type="number"
+    inputMode="decimal"
+    min={1}
+    value={bottle}
+    onChange={(e) => setBottle(e.target.value)}
+    placeholder={TH ? "ระบุเอง เช่น 75" : "Custom volume e.g. 75"}
+  />
+
+  <p className="text-[11px] text-slate-500">
+    {TH
+      ? "สามารถเลือกจากตัวเลือกหรือกำหนดปริมาตรเองได้"
+      : "Choose preset values or enter a custom bottle volume."}
+  </p>
+</div>
 
           <div className="space-y-2">
             <Label htmlFor="stab" className="flex items-center gap-2">
