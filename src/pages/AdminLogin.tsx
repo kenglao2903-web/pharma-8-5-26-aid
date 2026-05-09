@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
 import { LangSwitcher } from "@/components/LangSwitcher";
 
-const HASH ="03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+const HASH ="23e147da6f86339356b831f697f6018d93e8ee843da5b1f3c5caad346096a064";
 export const ADMIN_KEY = "pharmcalc.admin";
 
 const AdminLogin = () => {
