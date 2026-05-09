@@ -22,7 +22,8 @@ const AdminLogin = () => {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    if (code.trim() !== ACCESS_CODE) {
+    const hashed = SHA256(code.trim()).toString();
+    if (hashed !== HASH) {
       setLoading(false);
       toast.error(t("invalidCode"));
       return;
