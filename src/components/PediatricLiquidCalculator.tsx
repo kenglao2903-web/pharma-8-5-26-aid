@@ -47,7 +47,6 @@ export function PediatricLiquidCalculator() {
   const { lang } = useI18n();
   const { logActivity } = useAuth();
   const TH = lang === "th";
-
   const [drugName, setDrugName] = useState("");
   const [dose, setDose] = useState("");
   const [freq, setFreq] = useState<string>("3");
