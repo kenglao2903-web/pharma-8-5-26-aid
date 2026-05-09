@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SHA256 from "crypto-js/sha256";
+
 import { useNavigate, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,29 +9,36 @@ import { useI18n } from "@/lib/i18n";
 import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
 import { LangSwitcher } from "@/components/LangSwitcher";
+import { supabase } from "@/integrations/supabase/client";
 
-const HASH ="23e147da6f86339356b831f697f6018d93e8ee843da5b1f3c5caad346096a064";
-export const ADMIN_KEY = "pharmcalc.admin";
+
 
 const AdminLogin = () => {
   const { t } = useI18n();
   const nav = useNavigate();
-  const [code, setCode] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    const hashed = SHA256(code.trim()).toString();
-    if (hashed !== HASH) {
-      setLoading(false);
-      toast.error(t("invalidCode"));
-      return;
-    }
-    localStorage.setItem(ADMIN_KEY, "1");
-    toast.success("Admin signed in");
-    nav("/admin");
-  };
+  const submit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  setLoading(false);
+
+  if (error) {
+    toast.error("Invalid email or password");
+    return;
+  }
+
+  toast.success("Admin signed in");
+  nav("/admin");
+};
 
   return (
     <div className="min-h-screen bg-clinical-bg grid place-items-center p-4">
@@ -48,17 +55,26 @@ const AdminLogin = () => {
         <Card className="clinical-card p-6">
           <form onSubmit={submit} className="space-y-4">
             <div>
-              <Label className="label-clinical">{t("accessCode")}</Label>
-              <Input
-                type="password"
-                inputMode="numeric"
-                autoFocus
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                className="mt-1 font-mono tracking-widest text-center"
-                placeholder="••••••••"
-              />
-            </div>
+        <Label className="label-clinical">Email</Label>
+        <Input
+    type="email"
+    autoFocus
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    className="mt-1"
+    placeholder="admin@gmail.com"
+  />
+</div>
+<div>
+  <Label className="label-clinical">Password</Label>
+  <Input
+    type="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    className="mt-1"
+    placeholder="••••••••"
+  />
+</div>
             <Button type="submit" disabled={loading} className="w-full">
               {t("signIn")}
             </Button>
