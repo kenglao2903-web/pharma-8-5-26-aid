@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { useNavigate, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,23 +10,14 @@ import { ShieldCheck } from "lucide-react";
 import { LangSwitcher } from "@/components/LangSwitcher";
 import { supabase } from "@/integrations/supabase/client";
 
-
-
 const AdminLogin = () => {
   const { t } = useI18n();
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const submit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+  const submit = async (e: React.FormEvent) => {e.preventDefault();setLoading(true);
+  const { error } = await supabase.auth.signInWithPassword({email,password,});
 
   setLoading(false);
 
@@ -39,7 +29,6 @@ const AdminLogin = () => {
   toast.success("Admin signed in");
   nav("/admin");
 };
-
   return (
     <div className="min-h-screen bg-clinical-bg grid place-items-center p-4">
       <div className="w-full max-w-sm">
