@@ -486,18 +486,28 @@ export function PediatricLiquidCalculator() {
   <Label>{TH ? "ปริมาตรต่อขวด (มล.)" : "Bottle volume (ml)"}</Label>
 
   {/* Quick Select */}
-  <div className="flex gap-2 flex-wrap">
-    {BOTTLE_OPTIONS.map((b) => (
-      <Button
-        key={b}
-        type="button"
-        variant={bottle === b ? "default" : "outline"}
-        onClick={() => setBottle(b)}
-      >
-        {b} ml
-      </Button>
-    ))}
-  </div>
+  <div className="flex gap-2 flex-wrap items-center">
+  {BOTTLE_OPTIONS.map((b) => (
+    <Button
+      key={b}
+      type="button"
+      variant={bottle === b ? "default" : "outline"}
+      onClick={() => setBottle(b)}
+    >
+      {b} ml
+    </Button>
+  ))}
+
+  <Input
+    type="number"
+    inputMode="decimal"
+    min={1}
+    value={bottle}
+    onChange={(e) => setBottle(e.target.value)}
+    placeholder={TH ? "กรอกปริมาตร" : "Enter volume"}
+    className="h-10 w-32"
+  />
+</div>
 
   {/* Custom Input */}
   <Input
