@@ -1013,7 +1013,6 @@ const { member } = useAuth();
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px", marginBottom: "16px" }}>
             <tbody>
               {[
-          ...(treatmentStartDate ? [["Treatment start / เริ่มใช้ยา", formatDate(treatmentStartDate)]] : []),
                 ["Dose / ขนาดต่อครั้ง", `${numbers.d} ml`],
                 ["Frequency / ความถี่", `${numbers.f} ${"times/day · ครั้ง/วัน"}`],
                 ["Duration / ระยะเวลา", `${result.totalDays} days · วัน`],
