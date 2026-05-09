@@ -1241,14 +1241,12 @@ const { member } = useAuth();
   style={{
     marginTop: "20px",
     paddingTop: "10px",
-    paddingBottom: "2px",
+    paddingBottom: "6px",
     borderTop: "1px dashed #cbd5e1",
     fontSize: "10px",
-    lineHeight: "16px",
+    lineHeight: "18px",
     color: "#64748b",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
+    
   }}
 >
             <span>Instructions for Receiving Patient-Specific Extemporaneous Medication / คำแนะนำในการรับยาเตรียมเฉพาะราย</span>
