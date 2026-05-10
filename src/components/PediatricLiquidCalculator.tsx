@@ -11,7 +11,7 @@ import { useAuth } from "@/lib/auth";
 import { toast } from "@/hooks/use-toast";
 import { AlertTriangle, Baby, ChevronDown, Clock, Copy, Eye, FileDown, Maximize2, Minimize2, Pill, Printer, RotateCcw, ShieldAlert, Sticker, X } from "lucide-react";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+
 import bphLogo from "@/assets/bangkok-hospital-logo.png";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
@@ -325,7 +325,7 @@ const { member } = useAuth();
     const prev = node.style.cssText;
     node.style.cssText = "position:fixed;top:0;left:-10000px;width:794px;background:#fff;z-index:-1;display:block;";
     try {
-      const canvas = await html2canvas(node, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
+      
       const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
       const pageW = pdf.internal.pageSize.getWidth();
       const pageH = pdf.internal.pageSize.getHeight();
