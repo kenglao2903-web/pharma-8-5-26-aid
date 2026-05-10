@@ -400,7 +400,7 @@ const { member } = useAuth();
   <div class="sub">${drugName.trim() ? drugName.trim() + " · " : ""}${TH ? "ยาเตรียมเฉพาะราย" : "Extemporaneous Preparation"}</div>
   <div class="bottles">${TH ? `ทั้งหมด ${total} ขวด` : `Total: ${total} bottles`}</div>
   <table>${rows}</table>
-  <div class="footer">${TH ? "มารับยาขวดถัดไปก่อนยาขวดปัจจุบันหมด 1 วัน" : "Refill 1 day before current bottle expires"}</div>
+  <div class="footer">${TH ? "โรงพยาบาลกรุงเทพพัทยา" : "Bangkok hospital pattaya"}</div>
 </div>
 <script>setTimeout(()=>window.print(),300);</script>
 </body></html>`;
