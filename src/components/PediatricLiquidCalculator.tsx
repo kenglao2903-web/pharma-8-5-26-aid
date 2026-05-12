@@ -675,7 +675,7 @@ const { member } = useAuth();
   className="bg-red-500 hover:bg-red-600 text-white"
 >
   <a
-    href="https://docs.google.com/spreadsheets/d/1xOXuaBvsJETkqVSEnPhKxG5UOFBOaz3U75cCcuaLzWI/edit?usp=sharing"
+    href="https://1drv.ms/x/c/410d2e8cda2a6f1c/IQDJGOHly2NqRa3v3IEHdpWUAd_zxfFIChxawfNdok58rPo?e=i0Lwwv"
     target="_blank"
     rel="noopener noreferrer"
   >
