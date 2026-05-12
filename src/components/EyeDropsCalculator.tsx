@@ -421,7 +421,7 @@ export function EyeDropsCalculator() {
   className="bg-red-500 hover:bg-red-600 text-white shimmer-border"
 >
   <a
-    href="https://https://1drv.ms/x/c/410d2e8cda2a6f1c/IQDJGOHly2NqRa3v3IEHdpWUAWOKbA1L2EYGxdhYaF2eXsA?e=P60bjD"
+    href="https://1drv.ms/x/c/410d2e8cda2a6f1c/IQDJGOHly2NqRa3v3IEHdpWUAWOKbA1L2EYGxdhYaF2eXsA?e=P60bjD"
     target="_blank"
     rel="noopener noreferrer"
   >
