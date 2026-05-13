@@ -675,7 +675,7 @@ const { member } = useAuth();
   className="bg-red-500 hover:bg-red-600 text-white"
 >
   <a
-    href="https://1drv.ms/x/c/410d2e8cda2a6f1c/IQDJGOHly2NqRa3v3IEHdpWUAd_zxfFIChxawfNdok58rPo?e=i0Lwwv"
+    href="https://phase-swordtail-9bd.notion.site/35fe4e48bc5c8024bfaecd60d4f76282?pvs=143"
     target="_blank"
     rel="noopener noreferrer"
   >
